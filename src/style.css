@@ -1,0 +1,118 @@
+/* 产品反馈样式：按钮、图标、选择器、页头、分页和表格基线全部由
+   主题契约 theme.css 提供，本仓不复制同名实现；本文件只含仓专属布局（CRM 管理台同构）。 */
+* { box-sizing: border-box; }
+body { margin: 0; }
+html, body, #app { margin: 0; min-width: 0; min-height: 100%; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+h2 { font-size: 16px; margin: 0; font-weight: 650; }
+h3 { font-size: 14px; margin: 0; font-weight: 600; }
+a { color: var(--iam-color-primary); text-decoration: none; }
+:is(button, a, input, textarea):focus-visible { outline: 2px solid var(--iam-color-focus-ring); outline-offset: 2px; }
+
+.feedback-app { min-height: 100%; min-width: 0; width: 100%; font-family: var(--iam-font-family); font-size: 14px;
+  background: var(--iam-color-canvas); color: var(--iam-color-text-primary); line-height: 1.5; }
+.feedback-standalone-header { align-items: center; border-bottom: 1px solid var(--iam-color-border);
+  display: flex; gap: 16px; justify-content: space-between; padding: 12px 24px; }
+.feedback-standalone-header h1 { font-size: 16px; margin: 0; }
+
+/* 页面骨架：qiankun 挂载形态零 padding——留白由门户壳统一给（CRM/AKSK 管理台同构，
+   子应用自带页面级 padding 会与门户 padding 叠成双层边距）；仅直开 standalone 形态补 padding */
+.feedback-page { align-content: start; display: grid; gap: 20px; width: 100%; min-width: 0; }
+.feedback-app--standalone .feedback-page { padding: 24px; }
+.feedback-panel { display: grid; gap: 16px; background: var(--iam-color-surface-raised);
+  border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-card); padding: 20px; }
+
+input:not([type="checkbox"]), textarea { min-height: 40px; min-width: 0; max-width: 100%; padding: 8px 12px;
+  border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control);
+  background: var(--iam-color-surface-raised); color: var(--iam-color-text-primary); }
+input:disabled, textarea:disabled { background: var(--iam-color-surface-soft); }
+input::placeholder, textarea::placeholder { color: var(--iam-color-text-secondary); }
+label, .feedback-field { display: grid; font-size: 13px; font-weight: 700; gap: 7px; }
+fieldset.feedback-field { border: none; margin: 0; padding: 0; }
+.feedback-form { display: grid; gap: 16px; max-width: 720px; }
+.feedback-label { color: var(--iam-color-text-secondary); }
+
+.feedback-segment { display: flex; flex-wrap: wrap; gap: 8px; }
+.feedback-segment-item { border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control);
+  background: var(--iam-color-surface-raised); padding: 8px 14px; color: var(--iam-color-text-primary); }
+.feedback-segment-item:hover { background: var(--iam-color-surface-soft); }
+.feedback-segment-item.is-active { border-color: var(--iam-color-primary); color: var(--iam-color-primary);
+  font-weight: 700; }
+
+.feedback-score { display: flex; flex-wrap: wrap; gap: 6px; }
+.feedback-score-item { width: 36px; height: 32px; border: 1px solid var(--iam-color-border);
+  border-radius: var(--iam-radius-control); background: var(--iam-color-surface-raised);
+  color: var(--iam-color-text-primary); }
+.feedback-score-item:hover { border-color: var(--iam-color-primary); }
+.feedback-score-item.is-active { background: var(--iam-color-primary); border-color: var(--iam-color-primary);
+  color: var(--iam-color-primary-text); font-weight: 700; }
+.feedback-score-item.is-current { box-shadow: inset 0 0 0 2px var(--iam-color-primary-text); }
+
+.feedback-files { display: grid; gap: 4px; margin: 0; padding-left: 18px; font-weight: 400; }
+.feedback-message { margin: 0; font-size: 13px; overflow-wrap: anywhere; }
+.feedback-message.is-error { color: var(--iam-color-danger); }
+.feedback-message.is-ok { color: var(--iam-color-success); }
+.feedback-empty { color: var(--iam-color-text-secondary); margin: 0; }
+.feedback-muted { color: var(--iam-color-text-secondary); font-weight: 400; }
+.feedback-hint { color: var(--iam-color-text-secondary); font-size: 12px; display: block; }
+.feedback-link { border: none; background: none; padding: 3px 4px; color: var(--iam-color-primary); }
+.feedback-link:hover { text-decoration: underline; }
+.feedback-link:disabled { cursor: not-allowed; opacity: 0.55; text-decoration: none; }
+
+.feedback-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+/* 复用契约按钮形态，文字色按正式前景 token 适配自定义主题。 */
+.feedback-primary { color: var(--iam-color-primary-text); }
+.feedback-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.feedback-app .button-secondary:disabled { background: var(--iam-color-surface-soft); border-color: var(--iam-color-border);
+  color: var(--iam-color-text-secondary); cursor: not-allowed; }
+
+.feedback-status-badge { white-space: nowrap; }
+.feedback-table-actions, .feedback-attachment-list { display: flex; align-items: center; gap: 8px; }
+.feedback-attachment-list { flex-wrap: wrap; }
+.feedback-attachment-action { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.feedback-content-preview { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  overflow: hidden; overflow-wrap: anywhere; }
+.feedback-reply-preview { display: block; margin-top: 4px; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; color: var(--iam-color-text-secondary); font-size: 12px; }
+.feedback-app .data-table-scroll { scrollbar-color: var(--iam-color-border-strong) var(--iam-color-surface-raised);
+  scrollbar-width: thin; }
+.feedback-checkbox-field { display: inline-flex; align-items: center; gap: 10px; width: fit-content;
+  font-size: 14px; font-weight: 600; }
+.feedback-checkbox-field input[type="checkbox"] { width: 18px; height: 18px; min-height: 18px; margin: 0;
+  padding: 0; accent-color: var(--iam-color-primary); }
+
+.feedback-filter { display: flex; flex-wrap: wrap; gap: 12px; }
+.feedback-filter .form-select { width: auto; }
+/* 查询/重置按钮组右贴（管理台惯例：操作钮靠筛选行右端） */
+.feedback-filter-actions { display: flex; gap: 12px; margin-left: auto; }
+.feedback-handling { display: grid; gap: 12px; border-top: 2px solid var(--iam-color-border);
+  padding-top: 16px; scroll-margin-top: 80px; }
+.feedback-content { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
+.feedback-handling .feedback-field { font-weight: 400; }
+.feedback-detail-header, .feedback-detail-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.feedback-detail-header { justify-content: space-between; }
+.feedback-detail-section { display: grid; gap: 8px; min-width: 0; }
+.feedback-detail-section strong { font-size: 13px; }
+.feedback-drawer-stack { display: grid; gap: 18px; min-width: 0; }
+.feedback-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px 18px; }
+.feedback-detail-grid dt { color: var(--iam-color-text-secondary); font-size: 12px; }
+.feedback-detail-grid dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+.feedback-detail-block { display: grid; gap: 8px; border-top: 1px solid var(--iam-color-border); padding-top: 14px; min-width: 0; }
+.feedback-detail-block h3 { font-size: 13px; }
+.feedback-detail-block .feedback-link { display: inline-flex; max-width: 100%; overflow-wrap: anywhere; text-align: left; white-space: normal; }
+
+@media (min-width: 761px) {
+  .feedback-sticky-actions th:last-child, .feedback-sticky-actions td:last-child {
+    position: sticky; right: 0; z-index: 1; border-left: 1px solid var(--iam-color-border);
+    background: var(--iam-color-surface-raised);
+  }
+  .feedback-sticky-actions th:last-child { z-index: 2; }
+  .feedback-sticky-actions tbody tr:hover td:last-child {
+    background: color-mix(in srgb, var(--iam-color-surface-soft) 58%, transparent);
+  }
+}
+
+@media (max-width: 760px) {
+  .feedback-score { display: grid; grid-template-columns: repeat(5, 36px); }
+}

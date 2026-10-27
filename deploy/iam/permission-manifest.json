@@ -1,0 +1,31 @@
+{
+  "roles": [],
+  "pagePermissions": [
+    "feedback.page.submit",
+    "feedback.page.my",
+    "feedback.page.admin",
+    "feedback.page.registry"
+  ],
+  "apiPermissions": [
+    "feedback.submission.create",
+    "feedback.submission.read",
+    "feedback.submission.manage",
+    "feedback.submission.mine",
+    "feedback.submission.hint",
+    "feedback.application.list",
+    "feedback.application.read",
+    "feedback.application.manage"
+  ],
+  "dataResources": [
+    {
+      "resource": "feedback:submission",
+      "actions": [ "read", "manage" ],
+      "dimensions": [ "application" ]
+    },
+    {
+      "resource": "feedback:application",
+      "actions": [ "read", "manage" ],
+      "dimensions": [ "application" ]
+    }
+  ]
+}

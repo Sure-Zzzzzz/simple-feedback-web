@@ -1,0 +1,57 @@
+{
+  "applicationCode": "feedback",
+  "applicationName": "产品反馈",
+  "description": "产品反馈门户子应用",
+  "icon": "document",
+  "portal": {
+    "enabled": true,
+    "entry": "/app/feedback/index.html",
+    "apiBase": "/api/feedback",
+    "targetOrigin": "http://feedback-web:80",
+    "menuTree": [
+      { "code": "submit", "name": "提交反馈", "nodeType": "PAGE", "route": "/submit", "requiredPagePermission": "feedback.page.submit", "sortOrder": 1, "children": [] },
+      { "code": "my", "name": "我的反馈", "nodeType": "PAGE", "route": "/my", "requiredPagePermission": "feedback.page.my", "sortOrder": 2, "children": [] },
+      { "code": "admin", "name": "反馈管理", "nodeType": "PAGE", "route": "/admin", "requiredPagePermission": "feedback.page.admin", "sortOrder": 3, "children": [] },
+      { "code": "registry", "name": "应用注册表", "nodeType": "PAGE", "route": "/registry", "requiredPagePermission": "feedback.page.registry", "sortOrder": 4, "children": [] }
+    ]
+  },
+  "initialClient": {
+    "clientId": "<由受控部署环境注入的公共客户端 ID>",
+    "clientName": "Feedback Portal PKCE",
+    "clientType": "PUBLIC",
+    "requireConsent": false,
+    "redirectUris": [ "https://iam.example.com/app/feedback/oauth-callback" ],
+    "scopes": [ "openid", "profile" ],
+    "grantTypes": [ "authorization_code" ],
+    "authenticationMethods": [ "none" ]
+  },
+  "roles": [ "feedback-admin", "feedback-submitter", "feedback-handler", "feedback-registry-admin" ],
+  "pagePermissions": [
+    "feedback.page.submit",
+    "feedback.page.my",
+    "feedback.page.admin",
+    "feedback.page.registry"
+  ],
+  "apiPermissions": [
+    "feedback.submission.create",
+    "feedback.submission.read",
+    "feedback.submission.manage",
+    "feedback.submission.mine",
+    "feedback.submission.hint",
+    "feedback.application.list",
+    "feedback.application.read",
+    "feedback.application.manage"
+  ],
+  "dataResources": [
+    {
+      "resource": "feedback:submission",
+      "actions": [ "read", "manage" ],
+      "dimensions": [ "application" ]
+    },
+    {
+      "resource": "feedback:application",
+      "actions": [ "read", "manage" ],
+      "dimensions": [ "application" ]
+    }
+  ]
+}

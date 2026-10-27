@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.npmrc
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store
